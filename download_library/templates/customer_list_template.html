@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+            <h1>Welcome to the Download Library</h1>
+            <p>Downloads our software that needs to your company.</p>
+
+<div>
+    <span>Customers List</span>
+    
+        {% for customer in customers %}
+            <div class="article-item">
+                <h3><a href="{% url 'customer_files' customer.id %}">{{ customer.name }}</a></h3>
+            </div>    
+        {% endfor %}
+    
+    <!--<a href="{% url 'library_home' %}">Back to Library</a>-->
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<button class="back_button"> <a style="text-decoration: none; color: aliceblue;" href="/articles/">Go back</a></button>
+
+<div>
+    <h1>{{ article.title }}</h1>
+    <div class="inline">
+        <span>Category: {{ article.category }}
+            <!--Tags:
+                {% for tag in article.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}-->
+            
+        | Published on: {{ article.created_at }}</span>
+    </div>
+    <hr>
+    <!-- Render content with safe filter to keep HTML formatting -->
+    <div>{{ article.content|safe }}</div>
+</div>
+
+{% endblock %}

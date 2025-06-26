@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<button class="back_button"> <a style="text-decoration: none; color: aliceblue;" href="{% url 'customer_list' %}"> < Back</a></button>
+
+
+<div>
+    <title>{{ customer.name }}'s Files</title>
+</div>
+<div>
+    <h1>Files for {{ customer.name }}</h1>
+
+    {% if files %}
+        <ul>
+            {% for file in files %}
+                <li><a href="{{ file.upload.url }}" download>{{ file.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No files available for this customer.</p>
+    {% endif %}
+
+    <a href="{% url 'customer_list' %}">Back to Customer List</a>
+</div>
+
+{% endblock%}

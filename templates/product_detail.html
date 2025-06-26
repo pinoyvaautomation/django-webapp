@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+]
+{% block content %}
+<a class="back_button" href="{% url 'product_list' %}">Back to Products</a>
+<div class="product_detail" style="text-decoration: none;">
+   
+<h2>{{ product.name }}</h2>
+<hr>
+<p>{{ product.description }}</p>
+<div style="display: inline-flex;">
+    <p style="font-weight: bold; padding-right: 10px;">Price: ${{ product.price }}</p>
+    <p style="font-size: small; font-style: italic;">In Stock: {{ product.stock }}</p>
+</div>
+
+{% if product.stock > 0 %}
+    <form action="{% url 'add_to_cart' product.id %}" method="post">
+        {% csrf_token %}
+            <label for="quantity" style="text-decoration: none;">Enter Quantity</label>
+            <div class="search-bar">
+                <input type="number" name="quantity" id="quantity" min="1" max="{{ product.stock }}" value="1" required>
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </div>
+    </form>
+{% else %}
+    <p class="text-danger">Out of Stock</p>
+{% endif %}
+</div>
+{% endblock %}

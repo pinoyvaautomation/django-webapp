@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+    <h1>Welcome to the Knowledge Base</h1>
+    <p>Explore our articles to find solutions, guides, and information on various topics.</p>
+
+
+    {% for article in articles %}
+        <!--<li><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></li>-->
+     
+        <div class="article-item">
+            <h3><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></h3>
+        </div>                
+                
+    {% endfor %}
+
+{% endblock %}
+
+
+
+

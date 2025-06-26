@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telligens - Knowledge Base</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0f2a43;
+            padding: 1rem;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0 1rem;
+        }
+        .navbar a:hover {
+            background-color: #dde0e3;
+            padding: 1rem;
+            color: #0f2a43;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                flex-direction: row;
+            }
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            flex: 1;
+            max-width: 300px;
+            padding: 1rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 80px; /* Adjust based on navbar height */
+            box-shadow: 2px 10px 10px 10px rgba(138, 115, 115, 0.10);
+            height: 380px;
+        }
+        .sidebar h2 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin: 0.5rem 0;
+        }
+        .sidebar a {
+            color: #0f2a43;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content Section */
+        .content-area {
+            flex: 3;
+            padding: 1rem;
+        }
+        .content-area h1 {
+            color: #333;
+        }
+        .content-area p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Search Bar Styles */
+        .search-bar {
+            margin-bottom: 2rem;
+            display: flex;
+        }
+        .search-bar input[type="text"] {
+            width: 80%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #0f2a43;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+        .search-bar button:hover {
+            background-color: #0c131a;
+        }
+
+        /* Articles List Styles */
+        .articles-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        @media (min-width: 600px) {
+            .articles-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 900px) {
+            .articles-list {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .article-item {
+            background-color: white;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .article-item h3 {
+            margin: 0;
+            color: #333;
+        }
+        .article-item p {
+            color: #555;
+            line-height: 1.4;
+        }
+        .article-item a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .article-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #0f2a43;
+            color: white;
+            text-align: center;
+            padding: .1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <a href="#">Knowledge Base</a>
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Articles</a>
+            <a href="#">Download Library</a>
+            <a href="#">License</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Sidebar for Search and Categories -->
+        <div class="sidebar">
+            <h2>Search</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles...">
+                <button>Search</button>
+            </div>
+            
+            <h2>Categories</h2>
+            <ul>
+                <li><a href="#">Getting Started</a></li>
+                <li><a href="#">Network Troubleshooting</a></li>
+                <li><a href="#">Virtualization</a></li>
+                <li><a href="#">Cloud Storage</a></li>
+                <li><a href="#">General IT</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content Area with Articles -->
+        <div class="content-area">
+            <h1>Welcome to the Knowledge Base</h1>
+            <p>Explore our articles to find solutions, guides, and information on various topics.</p>
+
+            <!-- List of Articles -->
+            <div class="articles-list">
+                <div class="article-item">
+                    <h3><a href="#">How to Set Up Your Virtual Machine</a></h3>
+                    <p>Learn the step-by-step process to set up a virtual machine in VirtualBox, including best practices and troubleshooting tips.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">Troubleshooting Network Connectivity</a></h3>
+                    <p>This guide covers common network issues and solutions for improving connectivity in your local network.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">Using the Knowledge Base System</a></h3>
+                    <p>An overview of how to navigate and make the most out of the Knowledge Base System for faster resolutions.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">Understanding Cloud Storage</a></h3>
+                    <p>A beginner's guide to cloud storage, including benefits, providers, and data security tips for cloud users.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">How to Set Up Your Virtual Machine</a></h3>
+                    <p>Learn the step-by-step process to set up a virtual machine in VirtualBox, including best practices and troubleshooting tips.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">Troubleshooting Network Connectivity</a></h3>
+                    <p>This guide covers common network issues and solutions for improving connectivity in your local network.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">Using the Knowledge Base System</a></h3>
+                    <p>An overview of how to navigate and make the most out of the Knowledge Base System for faster resolutions.</p>
+                </div>
+                <div class="article-item">
+                    <h3><a href="#">Understanding Cloud Storage</a></h3>
+                    <p>A beginner's guide to cloud storage, including benefits, providers, and data security tips for cloud users.</p>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Telligens Technologies, LLC.</p>
+    </div>
+
+</body>
+</html>

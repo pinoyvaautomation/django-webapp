@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<button class="back_button"> <a style="text-decoration: none; color: aliceblue;" href="{% url 'customer_list' %}">Go back</a></button>
+
+
+<div>
+    <title>{{ customer.name }}'s Files</title>
+</div>
+<div>
+    <h1>Files for {{ customer.name }}</h1>
+    <span>Click the Software to automatic download.</span>
+
+    {% if files %}
+        <div>
+            {% for file in files %}
+            <div class="article-item">
+                <h3><a class="file_donwload_button_a" href="{{ file.upload.url }}" title="Click to download" download>{{ file.title }} | <span class="file_donwload_button">Download <span></span></a></h3>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No files available for this customer.</p>
+    {% endif %}
+
+    <!--<a href="{% url 'customer_list' %}">Back to Customer List</a>-->
+</div>
+
+{% endblock%}

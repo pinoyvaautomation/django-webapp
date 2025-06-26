@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telligens - Knowledge Base</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0f2a43;
+            padding: 1rem;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0 1rem;
+        }
+        .navbar a:hover {
+            background-color: #dde0e3;
+            padding: 1rem;
+            color: #0f2a43;
+        }
+        .search-bar {
+            margin: 3rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar input[type="text"] {
+            width: 35%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+       
+        .content {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 10%;
+        }
+        .box {
+            width: 200px;
+            padding: 1.5rem;
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .box a{
+            color: #4CAF50;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #0f2a43;
+            color: white;
+            text-align: center;
+            padding: .1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+      
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <!--<a href="#">Knowledge Base</a>-->
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'HomePage' %}">Home</a>
+            <a href="/articles/">Articles</a>
+            <a href="{% url 'customer_list' %}">Download Library</a>
+            <a href="/shop/">Products</a>
+            <a href="/admin/">Login</a>
+        </div>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+    </div>
+
+    <div class="content">
+        <div class="box">
+            <a href="/articles/"><h2>Knowledge Base</h2></a>
+            <p>Access helpful articles and resources.</p>
+        </div>
+        <div class="box">
+            <a href="{% url 'customer_list' %}"><h2>Download Library</h2></a>
+            <p>Find and download available files.</p>
+        </div>
+        <div class="box">
+            <a href="/shop/"><h2>Products</h2></a>
+            <p>Explore our products and offerings.</p>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Telligens Technologies, LLC.</p>
+    </div>
+
+</body>
+</html>

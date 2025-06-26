@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p>Category: {{ article.category }}</p>
+    <p>Tags:
+        {% for tag in article.tags.all %}
+            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <p>Published on: {{ article.created_at }}</p>
+    <hr>
+    <!-- Render content with safe filter to keep HTML formatting -->
+    <div>{{ article.content|safe }}</div>
+</body>
+</html>

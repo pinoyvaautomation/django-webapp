@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ category.name }} - Files</title>
+</head>
+<body>
+    <h1>{{ category.name }} - Files</h1>
+    <p>{{ category.description }}</p>
+
+    {% if files %}
+        <ul>
+            {% for file in files %}
+                <li><a href="{{ file.upload.url }}" download>{{ file.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No files available for this category and customer.</p>
+    {% endif %}
+
+    <a href="{% url 'library_home' %}">Back to Library</a>
+</body>
+</html>
