@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     'test-django.onrender.com',
     'test-django-s5zd.onrender.com',
     'tellsupport.xyz',
-    'www.tellsupport.xyz',
+    'www.tellsupport.xyz', #custom domain hosted at Namecheap
 ]
 
 # Add your domain here when you have a custom domain

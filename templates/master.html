@@ -201,6 +201,18 @@
         padding: 10px;
     }
 }
+.ModalBtnSearch {
+background-color: #0f2a43;
+color: white;
+border: none;
+padding: 10px 20px;
+font-size: 1rem;
+}
+.ModalBtnSearch:hover {
+background-color: white;
+color: #0f2a43;
+cursor: pointer;
+}
 
     </style>
 </head>
@@ -213,7 +225,7 @@
         </div>
         <div class="nav-links">
             <!-- Modal button -->
-            <button id="openModalBtn">Search</button>
+            <button id="openModalBtn" class="ModalBtnSearch">Search</button>
             <a href="{% url 'HomePage' %}">Home</a>
             <a href="/articles/">Articles</a>
             <a href="{% url 'customer_list' %}">Download Library</a>
@@ -299,7 +311,7 @@
       data.articles.forEach(item => {
         resultsDiv.innerHTML += `
           <div class="result-item">
-            <a href="/${item.id}/" target="_blank">${item.title}</a>
+            <a href="/${item.id}/" target="_self">${item.title}</a>
             <p>${item.snippet}</p>
           </div>`;
       });
@@ -310,7 +322,7 @@
       data.products.forEach(item => {
         resultsDiv.innerHTML += `
           <div class="result-item">
-            <a href="/shop/product/${item.id}/" target="_blank">${item.name}</a>
+            <a href="/shop/product/${item.id}/" target="_self">${item.name}</a>
             <p>${item.desc}</p>
           </div>`;
       });
@@ -321,7 +333,7 @@
       data.customers.forEach(item => {
         resultsDiv.innerHTML += `
           <div class="result-item">
-            <a href="customers/customers/${item.id}/" target="_blank">${item.name}</a>
+            <a href="customers/customers/${item.id}/" target="_self">${item.name}</a>
           </div>`;
           
       });
