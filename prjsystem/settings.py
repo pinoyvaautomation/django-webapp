@@ -31,6 +31,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'test-django.onrender.com',
     'test-django-s5zd.onrender.com',
+    'tellsupport.xyz',
+    'www.tellsupport.xyz',
 ]
 
 # Add your domain here when you have a custom domain
