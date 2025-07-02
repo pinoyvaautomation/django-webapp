@@ -233,6 +233,131 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
+        /* Modal Base */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content Box */
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+/* Modal Box */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.4s ease;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Close Button */
+.close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+.close:hover {
+    color: #000;
+}
+
+/* Input */
+#modalSearchInput {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    margin: 15px 0 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+#modalSearchInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    outline: none;
+}
+
+/* Results Section */
+#modalSearchResults h4 {
+    margin-top: 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.result-item {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+.result-item:hover {
+    background-color: #eef2f8;
+}
+.result-item a {
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.result-item a:hover {
+    text-decoration: underline;
+}
+.result-item p {
+    margin: 8px 0 0;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 20px;
+    }
+    .result-item {
+        padding: 10px;
+    }
+}
 
     </style>
 </head>
@@ -244,6 +369,8 @@
             <!--<a href="#">Telligens Technologies</a>-->
         </div>
         <div class="nav-links">
+            <!-- Modal button -->
+            <button id="openModalBtn">Search</button>
             <a href="/">Home</a>
             <a href="/articles/">Articles</a>
             <a href="{% url 'customer_list' %}">Download Library</a>
@@ -255,7 +382,7 @@
     <!-- Main Content -->
     <div class="main-content">
         
-        <!-- Sidebar for Search and Categories -->
+        <!-- Sidebar for Search and Categories
         <div class="sidebar">
             <h2>Search</h2>
             <div class="search-bar">
@@ -271,7 +398,7 @@
                 <li><a href="#">Cloud Storage</a></li>
                 <li><a href="#">General IT</a></li>
             </ul>
-        </div>
+        </div> -->
         
         <!-- Main Content Area with Articles -->
   
@@ -320,7 +447,18 @@
                 
             </div>-->
         </div>
+<!-- Modal -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <!-- Title enable if needed 
+        <h3>Search Articles</h3>-->
+        <input type="text" id="modalSearchInput" placeholder="Type to search...">
+        <div id="modalSearchResults"></div>
+    </div>
+</div>
 
+     <!-- End Pop up modal-->
     </div>
 
     <!-- Footer -->
@@ -328,5 +466,90 @@
         <p>&copy; 2024 Telligens Technologies, LLC.</p>
     </div>
 
+
+    <script>
+    const modal = document.getElementById("searchModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementById("closeModalBtn");
+    const searchInput = document.getElementById("modalSearchInput");
+    const resultsDiv = document.getElementById("modalSearchResults");
+
+    // Open modal
+    openBtn.onclick = () => {
+        modal.style.display = "block";
+        searchInput.value = "";
+        resultsDiv.innerHTML = "";
+        searchInput.focus();
+    };
+
+    // Close modal
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+    };
+
+    // Close when clicking outside modal
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    // Live search inside modal
+    searchInput.addEventListener("input", function () {
+        const query = searchInput.value;
+
+        if (query.length === 0) {
+            resultsDiv.innerHTML = "";
+            return;
+        }
+
+        fetch(`/ajax/search/?q=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                resultsDiv.innerHTML = "";
+
+                if (data.articles.length > 0) {
+      resultsDiv.innerHTML += '<h4>Articles</h4>';
+      data.articles.forEach(item => {
+        resultsDiv.innerHTML += `
+          <div class="result-item">
+            <a href="/${item.id}/" target="_blank">${item.title}</a>
+            <p>${item.snippet}</p>
+          </div>`;
+      });
+    }
+
+    if (data.products.length > 0) {
+      resultsDiv.innerHTML += '<h4>Products</h4>';
+      data.products.forEach(item => {
+        resultsDiv.innerHTML += `
+          <div class="result-item">
+            <a href="/shop/product/${item.id}/" target="_blank">${item.name}</a>
+            <p>${item.desc}</p>
+          </div>`;
+      });
+    }
+
+    if (data.customers.length > 0) {
+      resultsDiv.innerHTML += '<h4>Customers</h4>';
+      data.customers.forEach(item => {
+        resultsDiv.innerHTML += `
+          <div class="result-item">
+            <a href="customers/customers/${item.id}/" target="_blank">${item.name}</a>
+          </div>`;
+          
+      });
+    }
+
+    if (
+      data.articles.length === 0 &&
+      data.products.length === 0 &&
+      data.customers.length === 0 
+    ) {
+      resultsDiv.innerHTML = "<p>No results found.</p>";
+    }
+            });
+    });
+</script>
 </body>
 </html>
