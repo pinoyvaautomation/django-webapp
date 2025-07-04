@@ -25,6 +25,7 @@ class Category(models.Model):
 class File(models.Model):
     title = models.CharField(max_length=200)
     upload = models.FileField(upload_to='files/')
+    external_url = models.URLField(blank=True, null=True)  # For external links
     category = models.ForeignKey(Category, related_name='files', on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     customers = models.ManyToManyField(Customer, related_name='files', blank=True)

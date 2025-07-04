@@ -14,7 +14,7 @@
     <h1>Files for {{ customer.name }}</h1>
     <span>Click the Software to automatic download.</span>
 
-    {% if files %}
+    <!--{% if files %}
         <div>
             {% for file in files %}
             <div class="article-item">
@@ -24,9 +24,35 @@
         </div>
     {% else %}
         <p>No files available for this customer.</p>
-    {% endif %}
+    {% endif %}-->
 
     <!--<a href="{% url 'customer_list' %}">Back to Customer List</a>-->
 </div>
+<!--New updates external links-->
+<div>
+    {% for file in files %}
+<div class="article-item">
+    <h3>
+        {% if file.external_url %}
+            <a class="file_donwload_button_a"
+               href="{{ file.external_url }}"
+               target="_blank"
+               title="Click to download external file">
+               {{ file.title }} | <span class="file_donwload_button">Download</span>
+            </a>
+        {% else %}
+            <a class="file_donwload_button_a"
+               href="{{ file.upload.url }}"
+               download
+               title="Click to download file">
+               {{ file.title }} | <span class="file_donwload_button">Download</span>
+            </a>
+        {% endif %}
+    </h3>
+</div>
+{% endfor %}
+
+</div>
+
 
 {% endblock%}
